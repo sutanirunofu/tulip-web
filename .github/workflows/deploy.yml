@@ -39,4 +39,4 @@ jobs:
         with:
           project: "tulip"
           entrypoint: "main.ts"
-          root: "./"
+          root: ""
