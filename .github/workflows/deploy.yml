@@ -1,9 +1,9 @@
 name: Deploy
 on:
   push:
-    branches: main
+    branches: development
   pull_request:
-    branches: main
+    branches: development
 
 jobs:
   deploy:
@@ -37,6 +37,6 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "tulip"
+          project: "tulip-dev"
           entrypoint: "main.ts"
           root: ""
