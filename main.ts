@@ -7,7 +7,9 @@ Deno.serve(async (req) => {
     let path = new URL(req.url).pathname;
 
     if (path.endsWith("/")) {
-        path += "/index.html"
+        path += "/index.csr.html"
+    } else if (!path.includes(".")) {
+        path = "/index.csr.html"
     }
 
     let file;
@@ -16,7 +18,7 @@ Deno.serve(async (req) => {
         file = await Deno.open(staticPath + path);
     } catch(_){
         try {
-            file = await Deno.open(staticPath + "index.html");
+            file = await Deno.open(staticPath + "index.csr.html");
         } catch (ex) {
             console.log(ex);
             if(ex.code === "ENOENT"){
