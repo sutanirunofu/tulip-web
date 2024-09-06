@@ -55,7 +55,7 @@ ul {
 
   li {
     width: 100%;
-    height: $navbar-height;
+    height: calc($fs-m + $gap-m * 2);
 
     a,
     button {
@@ -76,10 +76,6 @@ ul {
         z-index: 1;
       }
 
-      &:hover::before {
-        transform: scaleX(1);
-      }
-
       &::before {
         content: "";
         position: absolute;
@@ -97,11 +93,18 @@ ul {
     }
 
     &.logout > button {
-        color: $color-red;
+      color: $color-red;
 
-        &::before {
-            background-color: $color-red;
-        }
+      &::before {
+        background-color: $color-red;
       }
+    }
+  }
+}
+
+@media (hover: hover) {
+  ul > li > a:hover::before,
+  ul > li > button:hover::before {
+    transform: scaleX(1);
   }
 }
