@@ -20,6 +20,7 @@ body {
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     height: 100dvh;
+    color: $color-black;
     font-weight: normal;
     font-style: normal;
     line-height: 2em;
@@ -35,6 +36,10 @@ hr {
 
 h1 {
     font-size: $fs-l;
+}
+
+h1, h2, h3, h4, h5, h6, p, strong, em, span, b {
+    color: $color-black;
 }
 
 img {
