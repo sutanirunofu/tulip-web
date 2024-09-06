@@ -93,7 +93,9 @@ ul {
     }
 
     &.logout > button {
-      color: $color-red;
+      p {
+        color: $color-red;
+      }
 
       &::before {
         background-color: $color-red;
