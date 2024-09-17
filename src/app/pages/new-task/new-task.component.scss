@@ -1,0 +1,197 @@
+@import "@vars/vars.scss";
+
+.new-task {
+    display: flex;
+    flex-direction: column;
+
+    header {
+        display: grid;
+        grid-template-columns: 48px 1fr 48px;
+        align-items: center;
+        width: 100%;
+        height: $navbar-height;
+        padding: 0 $gap-m;
+
+        .back-button {
+            width: fit-content;
+            height: fit-content;
+            background-color: $color-white;
+            border-radius: 50%;
+            // box-shadow: 0 0 4px $color-main;
+        }
+
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    main {
+        width: 100%;
+        height: calc(100dvh - $navbar-height);
+        padding: 0 $gap-m;
+
+        form {
+            width: 100%;
+            height: 100%;
+
+            .stepper {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.stepper-content {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-m;
+    width: 100%;
+    height: calc(100dvh - $navbar-height * 3 + $gap-m);
+
+    .step-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: $gap-m;
+    }
+
+    .task-name-container {
+        display: flex;
+        flex-direction: column;
+        grid-area: $gap-m;
+        width: 100%;
+        margin-top: $gap-s;
+
+        .task-name {
+            margin-top: $gap-l;
+
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    .task-description {
+        width: 100%;
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            max-height: 260px;
+        }
+    }
+
+    .task-date {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+    }
+
+    .task-checkbox-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $gap-s;
+        width: 100%;
+        height: auto;
+        max-height: calc(100dvh - $navbar-height * 4);
+        aspect-ratio: 2/1;
+
+        .task-checkbox {
+            justify-self: right;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1/1;
+            max-height: 300px;
+
+            &:nth-child(2n) {
+                justify-self: left;
+            }
+
+            input {
+                position: absolute;
+                visibility: hidden;
+
+                &:checked + label {
+                    border-color: $color-main;
+                    background-color: $color-main;
+
+                    strong {
+                        color: #fff;
+                    }
+                }
+            }
+
+            label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                border: 2px solid $color-gray;
+                background-color: transparent;
+                border-radius: $border-radius-outer;
+                transition: all $anim-time $anim-mode;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+::ng-deep {
+    .p-stepper {
+        flex-basis: 50rem;
+
+        p-button.prev-next span {
+            color: $color-white;
+        }
+
+        .p-stepper-nav {
+            overflow: hidden;
+        }
+
+        .p-stepper-panels {
+            height: 100%;
+            padding: 0;
+        }
+
+        [role="tablist"],
+        .p-stepper-content {
+            display: block;
+            height: 100%;
+
+            [role="tabpanel"] {
+                height: 100%;
+            }
+        }
+
+        .task-time-container {
+            width: 100%;
+            margin-top: $gap-l;
+
+            .task-time {
+                width: 100%;
+
+                p-inputNumber {
+                    width: 100%;
+
+                    span {
+                        width: 100%;
+
+                        input {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

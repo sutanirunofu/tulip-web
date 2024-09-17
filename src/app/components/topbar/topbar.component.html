@@ -1,0 +1,13 @@
+<div class="topbar">
+    <div class="menu-button">
+        <app-menu-button (click)="openCallback()" />
+    </div>
+    <div class="title">
+        <h2>{{ title }}</h2>
+    </div>
+    @if (hasEditButton) {
+        <div class="edit-button">
+            <app-edit-button (click)="edit.emit()" />
+        </div>
+    }
+</div>

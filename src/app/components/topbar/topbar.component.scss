@@ -1,0 +1,28 @@
+@import "@vars/vars.scss";
+
+.topbar {
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    align-items: center;
+    width: 100%;
+    height: $navbar-height;
+    background-color: $color-white;
+    padding: 0 $gap-m;
+
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .menu-button,
+    .edit-button {
+        width: fit-content;
+        height: fit-content;
+        background-color: $color-white;
+        border-radius: 50%;
+        // box-shadow: 0 0 4px $color-main;
+    }
+}

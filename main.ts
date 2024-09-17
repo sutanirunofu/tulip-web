@@ -7,21 +7,21 @@ Deno.serve(async (req) => {
     let path = new URL(req.url).pathname;
 
     if (path.endsWith("/")) {
-        path += "/index.csr.html"
+        path += "/index.csr.html";
     } else if (!path.includes(".")) {
-        path = "/index.csr.html"
+        path = "/index.csr.html";
     }
 
     let file;
 
     try {
         file = await Deno.open(staticPath + path);
-    } catch(_){
+    } catch (_) {
         try {
             file = await Deno.open(staticPath + "index.csr.html");
         } catch (ex) {
             console.log(ex);
-            if(ex.code === "ENOENT"){
+            if (ex.code === "ENOENT") {
                 return new Response("Not Found", { status: 404 });
             }
             return new Response("Internal Server Error", { status: 500 });
@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     }
     return new Response(file.readable, {
         headers: {
-            "content-type" : typeByExtension(extname(path))
-        }
+            "content-type": typeByExtension(extname(path)),
+        },
     });
-})
+});

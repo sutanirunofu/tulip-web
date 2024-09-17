@@ -1,19 +1,29 @@
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";
-@import "primeng/resources/themes/lara-light-purple/theme.css";
 @import "@vars/vars.scss";
 
-*, *::before, *::after {
+html,
+body {
+    width: 100%;
+}
+
+html,
+body,
+ul,
+li,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     user-select: none;
     outline: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-html, body {
-    width: 100%;
 }
 
 body {
@@ -25,12 +35,18 @@ body {
     font-style: normal;
     line-height: 2em;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 hr {
     width: 100%;
     height: 2px;
-    background-image: linear-gradient(0.25turn, $color-main-2, $color-main-50-2);
+    background-image: linear-gradient(
+        0.25turn,
+        $color-main-2,
+        $color-main-50-2
+    );
     border: none;
 }
 
@@ -38,7 +54,25 @@ h1 {
     font-size: $fs-l;
 }
 
-h1, h2, h3, h4, h5, h6, p, strong, em, span, b {
+h2 {
+    font-size: $fs-m;
+}
+
+small {
+    font-size: $fs-s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+strong,
+em,
+span,
+b {
     color: $color-black;
 }
 

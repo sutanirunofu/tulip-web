@@ -1,112 +1,112 @@
 @import "@vars/vars.scss";
 
 .header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  width: 100%;
-  height: fit-content;
-  padding: $gap-s;
-
-  .logo {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
     width: 100%;
-    height: 100%;
-    user-select: none;
-
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: $icon-l;
-      height: $icon-l;
-      border: none;
-      background-color: transparent;
-      padding: calc($gap-s / 2);
-    }
-
-    strong {
-      font-size: $fs-m;
-    }
-  }
-
-  .close {
-    width: fit-content;
     height: fit-content;
+    padding: $gap-s;
 
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: $icon-l;
-      height: $icon-l;
-      border: none;
-      background-color: transparent;
-      padding: calc($gap-s / 2);
-      cursor: pointer;
+    .logo {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        user-select: none;
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: $icon-l;
+            height: $icon-l;
+            border: none;
+            background-color: transparent;
+            padding: calc($gap-s / 2);
+        }
+
+        strong {
+            font-size: $fs-m;
+        }
     }
-  }
+
+    .close {
+        width: fit-content;
+        height: fit-content;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: $icon-l;
+            height: $icon-l;
+            border: none;
+            background-color: transparent;
+            padding: calc($gap-s / 2);
+            cursor: pointer;
+        }
+    }
 }
 
 ul {
-  width: 100%;
-  height: fit-content;
-  list-style: none;
-
-  li {
     width: 100%;
-    height: calc($fs-m + $gap-m * 2);
+    height: fit-content;
+    list-style: none;
 
-    a,
-    button {
-      display: flex;
-      align-items: center;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      color: $color-black;
-      text-decoration: none;
-      padding-left: $gap-m;
-      border: none;
-      background-color: transparent;
-      font-size: $fs-m;
-      cursor: pointer;
-
-      p {
-        z-index: 1;
-      }
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: scaleX(0);
-        transform-origin: left;
+    li {
         width: 100%;
-        height: 100%;
-        opacity: 0.1;
-        background-color: $color-main;
-        color: $color-white;
-        transition: transform $anim-time $anim-mode;
-      }
-    }
+        height: calc($fs-m + $gap-m * 2);
 
-    &.logout > button {
-      p {
-        color: $color-red;
-      }
+        a,
+        button {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            color: $color-black;
+            text-decoration: none;
+            padding-left: $gap-m;
+            border: none;
+            background-color: transparent;
+            font-size: $fs-m;
+            cursor: pointer;
 
-      &::before {
-        background-color: $color-red;
-      }
+            p {
+                z-index: 1;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                transform: scaleX(0);
+                transform-origin: left;
+                width: 100%;
+                height: 100%;
+                opacity: 0.05;
+                background-color: $color-main;
+                color: $color-white;
+                transition: transform $anim-time $anim-mode;
+            }
+        }
+
+        &.logout > button {
+            p {
+                color: $color-red;
+            }
+
+            &::before {
+                background-color: $color-red;
+            }
+        }
     }
-  }
 }
 
 @media (hover: hover) {
-  ul > li > a:hover::before,
-  ul > li > button:hover::before {
-    transform: scaleX(1);
-  }
+    ul > li > a:hover::before,
+    ul > li > button:hover::before {
+        transform: scaleX(1);
+    }
 }

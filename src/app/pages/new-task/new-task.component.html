@@ -1,1 +1,443 @@
-<p>new-task works!</p>
+<div class="new-task">
+    <header>
+        <div class="back-button">
+            <app-back-button
+                (click)="navigateToCallback.call(this, 'calendar')"
+            />
+        </div>
+        <div class="title">
+            <h2>Новая задача</h2>
+        </div>
+        <div></div>
+    </header>
+    <main>
+        <form>
+            <div class="stepper card flex justify-content-center">
+                <p-stepper
+                    [activeStep]="active.value"
+                    (activeStepChange)="active.setValue($event)"
+                >
+                    <p-stepperPanel>
+                        <ng-template
+                            pTemplate="header"
+                            let-onClick="onClick"
+                            let-index="index"
+                        >
+                            <button
+                                class="bg-transparent border-none inline-flex flex-column gap-2"
+                                (click)="onClick.emit()"
+                            >
+                                <span
+                                    class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                                    [ngClass]="{
+                                        'bg-primary border-primary':
+                                            index <= (active.value ?? 0),
+                                        'surface-border':
+                                            index > (active.value ?? 0),
+                                    }"
+                                >
+                                    <i class="pi pi-check-circle"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                        <ng-template
+                            pTemplate="content"
+                            let-nextCallback="nextCallback"
+                        >
+                            <div
+                                class="stepper-content flex flex-column gap-2 mx-auto"
+                            >
+                                <div class="task-name-container">
+                                    <p-floatLabel class="task-name">
+                                        <input
+                                            pInputText
+                                            id="task-name"
+                                            [formControl]="form.controls.name"
+                                            [maxlength]="50"
+                                        />
+                                        <label for="task-name"
+                                            >Название задачи</label
+                                        >
+                                    </p-floatLabel>
+                                </div>
+                                <div class="task-description">
+                                    <textarea
+                                        [formControl]="
+                                            form.controls.description
+                                        "
+                                        pInputTextarea
+                                        [autoResize]="true"
+                                        [maxlength]="1000"
+                                        placeholder="Описание задачи"
+                                    ></textarea>
+                                </div>
+                                <div class="step-title">
+                                    <h4>Тип задачи</h4>
+                                </div>
+                                <div class="task-checkbox-group">
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                setTaskType(
+                                                    $event.returnValue ? 0 : -1
+                                                )
+                                            "
+                                            [checked]="form.value.type === 0"
+                                            id="task-type-onetime"
+                                            type="radio"
+                                            name="task-type"
+                                        />
+                                        <label for="task-type-onetime">
+                                            <strong>Одноразовая</strong>
+                                        </label>
+                                    </div>
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                setTaskType(
+                                                    $event.returnValue ? 1 : -1
+                                                )
+                                            "
+                                            [checked]="form.value.type === 1"
+                                            id="task-type-regular"
+                                            type="radio"
+                                            name="task-type"
+                                        />
+                                        <label for="task-type-regular">
+                                            <strong>Повторяющаяся</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex pt-4 justify-content-end">
+                                <div class="next">
+                                    <p-button
+                                        class="prev-next"
+                                        (onClick)="nextCallback.emit()"
+                                        label="Далее&nbsp;&nbsp;"
+                                        icon="pi pi-arrow-right"
+                                        iconPos="right"
+                                        [disabled]="!form.controls.name.valid"
+                                    />
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-stepperPanel>
+                    <p-stepperPanel>
+                        <ng-template
+                            pTemplate="header"
+                            let-onClick="onClick"
+                            let-index="index"
+                        >
+                            <button
+                                class="bg-transparent border-none inline-flex flex-column gap-2"
+                                (click)="onClick.emit()"
+                                [disabled]="!form.controls.name.valid"
+                            >
+                                <span
+                                    class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                                    [ngClass]="{
+                                        'bg-primary border-primary':
+                                            index <= (active.value ?? 0),
+                                        'surface-border':
+                                            index > (active.value ?? 0),
+                                    }"
+                                >
+                                    <i class="pi pi-exclamation-circle"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                        <ng-template
+                            pTemplate="content"
+                            let-prevCallback="prevCallback"
+                            let-nextCallback="nextCallback"
+                        >
+                            <div
+                                class="stepper-content flex flex-column gap-2 mx-auto"
+                            >
+                                <div class="step-title">
+                                    <h4>Важность задачи</h4>
+                                </div>
+                                <div class="task-checkbox-group">
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                setTaskImportance(
+                                                    $event.returnValue ? 3 : -1
+                                                )
+                                            "
+                                            [checked]="
+                                                form.value.importance === 3
+                                            "
+                                            id="task-important-3"
+                                            type="radio"
+                                            name="task-importance"
+                                        />
+                                        <label for="task-important-3">
+                                            <strong>Очень важно</strong>
+                                        </label>
+                                    </div>
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                setTaskImportance(
+                                                    $event.returnValue ? 2 : -1
+                                                )
+                                            "
+                                            [checked]="
+                                                form.value.importance === 2
+                                            "
+                                            id="task-important-2"
+                                            type="radio"
+                                            name="task-importance"
+                                        />
+                                        <label for="task-important-2">
+                                            <strong>Важно</strong>
+                                        </label>
+                                    </div>
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                setTaskImportance(
+                                                    $event.returnValue ? 1 : -1
+                                                )
+                                            "
+                                            [checked]="
+                                                form.value.importance === 1
+                                            "
+                                            id="task-important-1"
+                                            type="radio"
+                                            name="task-importance"
+                                        />
+                                        <label for="task-important-1">
+                                            <strong>Неважно</strong>
+                                        </label>
+                                    </div>
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                setTaskImportance(
+                                                    $event.returnValue ? 0 : -1
+                                                )
+                                            "
+                                            [checked]="
+                                                form.value.importance === 0
+                                            "
+                                            id="task-important-0"
+                                            type="radio"
+                                            name="task-importance"
+                                        />
+                                        <label for="task-important-0">
+                                            <strong>Совсем неважно</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex pt-4 justify-content-between">
+                                <p-button
+                                    class="prev-next"
+                                    (onClick)="prevCallback.emit()"
+                                    label="&nbsp;&nbsp;Назад"
+                                    icon="pi pi-arrow-left"
+                                />
+                                <p-button
+                                    class="prev-next"
+                                    (onClick)="nextCallback.emit()"
+                                    label="Далее&nbsp;&nbsp;"
+                                    icon="pi pi-arrow-right"
+                                    iconPos="right"
+                                />
+                            </div>
+                        </ng-template>
+                    </p-stepperPanel>
+                    <p-stepperPanel>
+                        <ng-template
+                            pTemplate="header"
+                            let-onClick="onClick"
+                            let-index="index"
+                        >
+                            <button
+                                class="bg-transparent border-none inline-flex flex-column gap-2"
+                                (click)="onClick.emit()"
+                                [disabled]="!form.controls.name.valid"
+                            >
+                                <span
+                                    class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                                    [ngClass]="{
+                                        'bg-primary border-primary':
+                                            index <= (active.value ?? 0),
+                                        'surface-border':
+                                            index > (active.value ?? 0),
+                                    }"
+                                >
+                                    <i class="pi pi-calendar"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                        <ng-template
+                            pTemplate="content"
+                            let-prevCallback="prevCallback"
+                            let-nextCallback="nextCallback"
+                        >
+                            <div
+                                class="stepper-content flex flex-column gap-2 mx-auto"
+                            >
+                                <div class="step-title">
+                                    <h4>Дата выполнения задачи (Дедлайн)</h4>
+                                </div>
+
+                                <div class="task-date flex-auto">
+                                    <p-calendar
+                                        [minDate]="minDate"
+                                        [showTime]="true"
+                                        hourFormat="24"
+                                        [formControl]="form.controls.deadline"
+                                        [iconDisplay]="'input'"
+                                        [showIcon]="true"
+                                        [inline]="true"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex pt-4 justify-content-between">
+                                <p-button
+                                    class="prev-next"
+                                    (onClick)="prevCallback.emit()"
+                                    label="&nbsp;&nbsp;Назад"
+                                    icon="pi pi-arrow-left"
+                                />
+                                <p-button
+                                    class="prev-next"
+                                    (onClick)="nextCallback.emit()"
+                                    label="Далее&nbsp;&nbsp;"
+                                    icon="pi pi-arrow-right"
+                                    iconPos="right"
+                                />
+                            </div>
+                        </ng-template>
+                    </p-stepperPanel>
+                    <p-stepperPanel>
+                        <ng-template
+                            pTemplate="header"
+                            let-onClick="onClick"
+                            let-index="index"
+                        >
+                            <button
+                                class="bg-transparent border-none inline-flex flex-column gap-2"
+                                (click)="onClick.emit()"
+                                [disabled]="!form.controls.name.valid"
+                            >
+                                <span
+                                    class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+                                    [ngClass]="{
+                                        'bg-primary border-primary':
+                                            index <= (active.value ?? 0),
+                                        'surface-border':
+                                            index > (active.value ?? 0),
+                                    }"
+                                >
+                                    <i class="pi pi-clock"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                        <ng-template
+                            pTemplate="content"
+                            let-prevCallback="prevCallback"
+                        >
+                            <div
+                                class="stepper-content flex flex-column gap-2 mx-auto"
+                            >
+                                <div class="step-title">
+                                    <h4>Время выполнения задачи</h4>
+                                </div>
+                                <div class="task-checkbox-group">
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                form.controls.time.setValue(1)
+                                            "
+                                            [checked]="form.value.time === 1"
+                                            id="task-time-0"
+                                            type="radio"
+                                            name="task-time"
+                                        />
+                                        <label for="task-time-0">
+                                            <strong>1 час</strong>
+                                        </label>
+                                    </div>
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                form.controls.time.setValue(2)
+                                            "
+                                            [checked]="form.value.time === 2"
+                                            id="task-time-1"
+                                            type="radio"
+                                            name="task-time"
+                                        />
+                                        <label for="task-time-1">
+                                            <strong>2 часа</strong>
+                                        </label>
+                                    </div>
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                form.controls.time.setValue(4)
+                                            "
+                                            [checked]="form.value.time === 4"
+                                            id="task-time-2"
+                                            type="radio"
+                                            name="task-time"
+                                        />
+                                        <label for="task-time-2">
+                                            <strong>4 часа</strong>
+                                        </label>
+                                    </div>
+                                    <div class="task-checkbox">
+                                        <input
+                                            (input)="
+                                                form.controls.time.setValue(8)
+                                            "
+                                            [checked]="form.value.time === 8"
+                                            id="task-time-3"
+                                            type="radio"
+                                            name="task-time"
+                                        />
+                                        <label for="task-time-3">
+                                            <strong>8 часов</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="task-time-container">
+                                    <p-floatLabel class="task-time">
+                                        <p-inputNumber
+                                            id="task-time"
+                                            [formControl]="form.controls.time"
+                                            [min]="0"
+                                        />
+                                        <label for="task-time"
+                                            >Время выполнения задачи
+                                            (часы)</label
+                                        >
+                                    </p-floatLabel>
+                                </div>
+                            </div>
+                            <div class="flex pt-4 justify-content-between">
+                                <p-button
+                                    class="prev-next"
+                                    (onClick)="prevCallback.emit()"
+                                    label="&nbsp;&nbsp;Назад"
+                                    icon="pi pi-arrow-left"
+                                />
+                                <p-button
+                                    class="prev-next"
+                                    (onClick)="createTaskCallback()"
+                                    label="Создать"
+                                />
+                            </div>
+                        </ng-template>
+                    </p-stepperPanel>
+                </p-stepper>
+            </div>
+        </form>
+    </main>
+</div>
