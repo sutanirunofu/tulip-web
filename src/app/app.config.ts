@@ -1,17 +1,8 @@
-import {
-    ApplicationConfig,
-    provideZoneChangeDetection,
-    isDevMode,
-    LOCALE_ID,
-    importProvidersFrom,
-} from "@angular/core";
+import { ApplicationConfig, provideZoneChangeDetection, isDevMode, LOCALE_ID, importProvidersFrom } from "@angular/core";
 import { provideRouter } from "@angular/router";
 
 import { routes } from "./app.routes";
-import {
-    BrowserModule,
-    provideClientHydration,
-} from "@angular/platform-browser";
+import { BrowserModule, provideClientHydration } from "@angular/platform-browser";
 import { provideStore } from "@ngrx/store";
 import { provideEffects } from "@ngrx/effects";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
@@ -22,11 +13,7 @@ import { StyleClassModule } from "primeng/styleclass";
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        importProvidersFrom([
-            BrowserModule,
-            BrowserAnimationsModule,
-            StyleClassModule,
-        ]),
+        importProvidersFrom([BrowserModule, BrowserAnimationsModule, StyleClassModule]),
         provideHttpClient(),
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes),

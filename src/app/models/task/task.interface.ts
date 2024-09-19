@@ -1,6 +1,20 @@
+export interface ITaskProps {
+    name: string;
+    description: string;
+    type: TaskTypeEnum;
+    importance: TaskImportanceEnum;
+}
+
+export interface ITaskResponse extends ITaskProps {
+    _id: string;
+    publishDate: number;
+    __v: number;
+}
+
 export enum TaskTypeEnum {
-    ONETIME = 0,
-    REGULAR = 1,
+    NOTICE = 0,
+    EVENT = 1,
+    HABIT = 2,
 }
 
 export enum TaskImportanceEnum {

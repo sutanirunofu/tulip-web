@@ -8,13 +8,7 @@ import { InputIconModule } from "primeng/inputicon";
 import { CommonModule, Location, NgStyle } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BackButtonComponent } from "../../components/back-button/back-button.component";
-import {
-    FormControl,
-    FormGroup,
-    FormsModule,
-    ReactiveFormsModule,
-    Validators,
-} from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { TaskImportanceEnum, TaskTypeEnum } from "models/task/task.interface";
 import { FloatLabelModule } from "primeng/floatlabel";
 import { InputTextareaModule } from "primeng/inputtextarea";
@@ -46,30 +40,24 @@ import { InputNumberModule } from "primeng/inputnumber";
     styleUrl: "./new-task.component.scss",
 })
 export class NewTaskComponent implements OnInit {
+    taskType: typeof TaskTypeEnum = TaskTypeEnum;
     active = new FormControl<number>(0);
     minDate = new Date();
 
     form = new FormGroup({
         name: new FormControl<string>("", {
             nonNullable: true,
-            validators: [
-                Validators.required,
-                Validators.minLength(1),
-                Validators.maxLength(50),
-            ],
+            validators: [Validators.required, Validators.minLength(1), Validators.maxLength(50)],
         }),
         description: new FormControl<string>("", {
             nonNullable: true,
             validators: [Validators.maxLength(1000)],
         }),
-        type: new FormControl<TaskTypeEnum>(TaskTypeEnum.ONETIME, {
+        type: new FormControl<TaskTypeEnum>(TaskTypeEnum.NOTICE, {
             nonNullable: true,
             validators: [Validators.required],
         }),
-        importance: new FormControl<TaskImportanceEnum>(
-            TaskImportanceEnum.TOTAL_NOT_IMPORTANT,
-            { nonNullable: true, validators: [Validators.required] }
-        ),
+        importance: new FormControl<TaskImportanceEnum>(TaskImportanceEnum.TOTAL_NOT_IMPORTANT, { nonNullable: true, validators: [Validators.required] }),
         deadline: new FormControl<Date>(new Date(), {
             nonNullable: true,
             validators: [Validators.required],

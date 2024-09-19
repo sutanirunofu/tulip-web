@@ -4,7 +4,4 @@ import { sidebarNode } from "./sidebar.reducer";
 
 const sidebarFeature = createFeatureSelector<ISidebarState>(sidebarNode);
 
-export const selectSidebarIsVisible = createSelector(
-    sidebarFeature,
-    (state: ISidebarState): boolean => state.isVisible
-);
+export const selectSidebarIsVisible = createSelector(sidebarFeature, (state: ISidebarState): boolean => state.isVisible);

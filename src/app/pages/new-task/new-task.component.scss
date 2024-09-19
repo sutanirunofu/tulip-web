@@ -52,6 +52,7 @@
     display: flex;
     flex-direction: column;
     gap: $gap-m;
+    align-items: center;
     width: 100%;
     height: calc(100dvh - $navbar-height * 3 + $gap-m);
 
@@ -97,23 +98,48 @@
     }
 
     .task-checkbox-group {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-wrap: wrap;
         gap: $gap-s;
         width: 100%;
         height: auto;
+        max-width: 500px;
         max-height: calc(100dvh - $navbar-height * 4);
-        aspect-ratio: 2/1;
 
         .task-checkbox {
-            justify-self: right;
+            flex: 1 1 40%;
             width: 100%;
-            height: 100%;
+            height: auto;
             aspect-ratio: 1/1;
-            max-height: 300px;
+            max-height: 250px;
+            min-height: 100px;
+
+            &.notice > input:checked ~ label {
+                background-color: $color-blue;
+                border-color: $color-blue;
+            }
+
+            &.event > input:checked ~ label {
+                background-color: $color-yellow;
+                border-color: $color-yellow;
+                
+                strong {
+                    color: $color-black;
+                }
+            }
+
+            &.habit > input:checked ~ label {
+                background-color: $color-green;
+                border-color: $color-green;
+            }
 
             &:nth-child(2n) {
                 justify-self: left;
+            }
+
+            &:nth-child(3n):last-child {
+                grid-column: 1/3;
+                aspect-ratio: unset;
             }
 
             input {
