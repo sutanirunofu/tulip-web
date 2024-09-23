@@ -122,7 +122,7 @@
             &.event > input:checked ~ label {
                 background-color: $color-yellow;
                 border-color: $color-yellow;
-                
+
                 strong {
                     color: $color-black;
                 }
@@ -178,6 +178,10 @@
 
         p-button.prev-next span {
             color: $color-white;
+        }
+
+        button:disabled {
+            cursor: not-allowed !important;
         }
 
         .p-stepper-nav {

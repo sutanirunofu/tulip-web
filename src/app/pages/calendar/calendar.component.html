@@ -2,6 +2,31 @@
     <app-topbar title="Календарь" />
     <hr />
     <main>
+        <div #calendarScrollArea class="calendar-inner">
+            <div class="calendar-aside">
+                @for (item of asideItems; track $index) {
+                    <div class="calendar-aside-item">
+                        <small>{{ item | date: "HH:mm" }}</small>
+                    </div>
+                }
+            </div>
+            <div class="calendar-content">
+                @for (task of tasks; track $index) {
+                    <div
+                        class="task"
+                        [ngStyle]="{
+                            top: task.styles.top,
+                            height: task.styles.height,
+                        }"
+                    >
+                        <small>
+                            <strong>{{ task.name }}</strong>
+                        </small>
+                    </div>
+                }
+            </div>
+        </div>
+
         <div class="add-task">
             <app-plus-button (click)="navigateToCallback.call(this, 'new-task')" />
         </div>

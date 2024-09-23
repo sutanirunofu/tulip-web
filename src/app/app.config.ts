@@ -23,6 +23,6 @@ export const appConfig: ApplicationConfig = {
         }),
         provideEffects(),
         provideStoreDevtools({ maxAge: 100, logOnly: !isDevMode() }),
-        { provide: LOCALE_ID, useValue: "ru" },
+        // { provide: LOCALE_ID, useValue: "ru" },
     ],
 };

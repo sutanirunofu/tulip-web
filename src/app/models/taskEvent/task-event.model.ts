@@ -2,7 +2,6 @@ import { TaskTypeEnum } from "models/task/task.interface";
 import { Task } from "models/task/task.model";
 import { ITaskEventProps } from "./task-event.interface";
 
-
 export class TaskEvent extends Task {
     override type = TaskTypeEnum.EVENT;
     private deadline: Date;

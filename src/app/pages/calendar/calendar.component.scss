@@ -15,15 +15,82 @@
     main {
         position: relative;
         width: 100%;
-        height: 100%;
+        height: calc(100dvh - $navbar-height);
+        padding: 0 $gap-m;
+
+        .calendar-inner {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            // scroll-behavior: smooth;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .calendar-aside {
+                display: flex;
+                flex-direction: column;
+                width: fit-content;
+                max-width: $navbar-height;
+                height: fit-content;
+                border-right: 1px solid $color-gray;
+                margin: $gap-s 0;
+                padding-right: $gap-m;
+
+                .calendar-aside-item {
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    width: fit-content;
+                    height: $calendar-item-height;
+
+                    &:not(:last-child)::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        width: calc(100dvw - $gap-m * 2);
+                        height: 1px;
+                        border-bottom: 1px solid $color-gray;
+                    }
+                }
+            }
+
+            .calendar-content {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                margin: $gap-s 0;
+
+                .task {
+                    position: absolute;
+                    left: $gap-s;
+                    top: 0;
+                    width: calc(100% - $gap-s);
+                    height: fit-content;
+                    background-color: $color-blue;
+                    border: 1px solid $color-white;
+                    border-radius: $border-radius-inner;
+                    padding: $gap-s;
+
+                    small > strong {
+                        color: $color-white;
+                    }
+                }
+            }
+        }
 
         .add-task {
             position: absolute;
             right: $gap-l;
             bottom: $gap-l;
             background-color: $color-white;
+            border: 1px solid $color-main;
             border-radius: 50%;
-            // box-shadow: 0 0 4px $color-main;
+            box-shadow: 0 0 2px $color-main;
         }
     }
 }
