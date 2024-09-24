@@ -54,7 +54,6 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     ) {}
 
     ngOnInit(): void {
-        console.log(80 * new Date().getHours());
         let date = new Date(Date.now());
         date.setHours(0, 0, 0, 0);
 
@@ -66,7 +65,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         const date = new Date();
-        this.calendarScrollArea.nativeElement.scrollTop += 80 * date.getHours();
+        this.calendarScrollArea.nativeElement.scrollTop += (60 * date.getHours()) / 2 - 60;
     }
 
     openCallback(): void {

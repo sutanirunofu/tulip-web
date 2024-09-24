@@ -62,6 +62,10 @@
         align-items: center;
         width: 100%;
         margin-top: $gap-m;
+
+        h4 {
+            font-weight: normal;
+        }
     }
 
     .task-name-container {
@@ -105,6 +109,7 @@
         height: auto;
         max-width: 500px;
         max-height: calc(100dvh - $navbar-height * 4);
+        margin-top: $gap-m;
 
         .task-checkbox {
             flex: 1 1 40%;
@@ -122,10 +127,7 @@
             &.event > input:checked ~ label {
                 background-color: $color-yellow;
                 border-color: $color-yellow;
-
-                strong {
-                    color: $color-black;
-                }
+                color: $color-black;
             }
 
             &.habit > input:checked ~ label {
@@ -149,10 +151,8 @@
                 &:checked + label {
                     border-color: $color-main;
                     background-color: $color-main;
-
-                    strong {
-                        color: #fff;
-                    }
+                    color: $color-white;
+                    font-weight: 600;
                 }
             }
 
@@ -162,9 +162,9 @@
                 align-items: center;
                 width: 100%;
                 height: 100%;
-                border: 2px solid $color-gray;
+                border: 1px solid $color-gray;
                 background-color: transparent;
-                border-radius: $border-radius-outer;
+                border-radius: $border-radius-m;
                 transition: all $anim-time $anim-mode;
                 cursor: pointer;
             }
